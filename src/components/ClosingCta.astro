@@ -1,0 +1,15 @@
+---
+import { closingCta } from "../data/content";
+import { appLinks } from "../lib/links";
+import Button from "./ui/Button.astro";
+import Reveal from "./ui/Reveal.astro";
+---
+
+<section class="section-y" aria-labelledby="closing-title">
+  <Reveal class="container-page">
+    <div class="flex flex-col items-start gap-8 rounded-card bg-ink px-8 py-14 md:flex-row md:items-center md:justify-between md:px-14">
+      <h2 id="closing-title" class="max-w-xl text-h2 font-bold text-paper">{closingCta.headline}</h2>
+      <Button href={appLinks.signup} variant="secondary">{closingCta.cta}</Button>
+    </div>
+  </Reveal>
+</section>

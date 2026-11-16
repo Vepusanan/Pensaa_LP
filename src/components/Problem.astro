@@ -1,0 +1,49 @@
+---
+import { problem, type Accent } from "../data/content";
+import { splitOn } from "../lib/links";
+import Icon from "./ui/Icon.astro";
+import Reveal from "./ui/Reveal.astro";
+import SectionHeading from "./ui/SectionHeading.astro";
+
+const parts = splitOn(problem.headline, problem.highlight);
+
+const chips: Record<Accent, string> = {
+  red: "bg-accent-red-soft text-accent-red-ink",
+  amber: "bg-accent-amber-soft text-accent-amber-ink",
+  blue: "bg-accent-blue-soft text-accent-blue-ink",
+  green: "bg-accent-green-soft text-accent-green-ink",
+};
+---
+
+<section id="problem" class="section-y" aria-labelledby="problem-title">
+  <div class="container-page">
+    <SectionHeading id="problem-title" eyebrow={problem.eyebrow} title={problem.headline} body={problem.body}>
+      {
+        parts ? (
+          <>
+            {parts[0]}
+            <span class="text-[1.45em] leading-none text-brand">{parts[1]}</span>
+            {parts[2]}
+          </>
+        ) : (
+          problem.headline
+        )
+      }
+    </SectionHeading>
+
+    <ul class="mx-auto mt-14 grid max-w-[1000px] gap-4 md:grid-cols-2 md:gap-5">
+      {
+        problem.cards.map((card, i) => (
+          <Reveal as="li" index={i}>
+            <div class="flex h-full gap-5 rounded-card border border-line bg-surface p-6 shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift md:p-7">
+              <span class:list={["grid size-11 shrink-0 place-items-center rounded-2xl", chips[card.accent]]}>
+                <Icon name={card.icon} class="size-5" />
+              </span>
+              <p class="pt-2 font-medium text-ink">{card.text}</p>
+            </div>
+          </Reveal>
+        ))
+      }
+    </ul>
+  </div>
+</section>

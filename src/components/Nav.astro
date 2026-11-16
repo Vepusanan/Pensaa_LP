@@ -1,0 +1,169 @@
+---
+import { brand, nav, ui } from "../data/content";
+import { appLinks } from "../lib/links";
+import Button from "./ui/Button.astro";
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color,backdrop-filter] duration-300 data-[scrolled]:border-line data-[scrolled]:bg-surface/80 data-[scrolled]:backdrop-blur-lg data-[open]:border-line data-[open]:bg-surface"
+>
+  <div class="container-page flex h-[72px] items-center justify-between gap-4">
+    <a href="#top" class="font-display text-2xl font-bold tracking-tight" aria-label={ui.homeLabel}>{brand}</a>
+
+    <nav aria-label={nav.ariaLabel} class="hidden lg:block">
+      <ul class="flex items-center gap-0.5">
+        {
+          nav.items.map((item) => (
+            <li>
+              <a
+                href={`#${item.id}`}
+                data-nav-link={item.id}
+                class="block rounded-full px-2.5 py-1.5 text-sm font-medium whitespace-nowrap text-muted xl:px-3.5 transition-colors hover:text-ink aria-[current=true]:bg-brand-soft aria-[current=true]:text-brand"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="hidden items-center gap-2 lg:flex">
+      <Button href={appLinks.login} variant="ghost" size="sm">{nav.login}</Button>
+      <Button href={appLinks.signup} size="sm">{nav.signup}</Button>
+    </div>
+
+    <button
+      type="button"
+      id="menu-toggle"
+      class="-mr-2 grid size-11 place-items-center rounded-full text-ink lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-label-open={nav.openMenu}
+      data-label-close={nav.closeMenu}
+    >
+      <span class="sr-only" data-menu-label>{nav.openMenu}</span>
+      <svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path class="menu-line-a origin-center transition-transform duration-300" d="M4 8h16" />
+        <path class="menu-line-b origin-center transition-transform duration-300" d="M4 16h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="grid grid-rows-[0fr] border-line transition-[grid-template-rows] duration-300 ease-out data-[open]:grid-rows-[1fr] data-[open]:border-t lg:hidden"
+    inert
+  >
+    <div class="overflow-hidden">
+      <nav aria-label={nav.ariaLabel} class="container-page py-4">
+        <ul class="flex flex-col">
+          {
+            nav.items.map((item) => (
+              <li>
+                <a
+                  href={`#${item.id}`}
+                  data-nav-link={item.id}
+                  class="block rounded-2xl px-3 py-3 font-display text-xl font-semibold text-ink aria-[current=true]:bg-brand-soft aria-[current=true]:text-brand"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-4 flex flex-col gap-2 border-t border-line pt-4 sm:flex-row">
+          <Button href={appLinks.signup} class="sm:flex-1">{nav.signup}</Button>
+          <Button href={appLinks.login} variant="secondary" class="sm:flex-1">{nav.login}</Button>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  #menu-toggle[aria-expanded="true"] .menu-line-a {
+    transform: translateY(4px) rotate(45deg);
+  }
+  #menu-toggle[aria-expanded="true"] .menu-line-b {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-header")!;
+  const toggle = document.getElementById("menu-toggle") as HTMLButtonElement;
+  const menu = document.getElementById("mobile-menu")!;
+  const label = toggle.querySelector<HTMLElement>("[data-menu-label]")!;
+  const desktop = window.matchMedia("(min-width: 64rem)");
+
+  // Scrolled state
+  const onScroll = () => header.toggleAttribute("data-scrolled", window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Mobile menu
+  const focusables = () =>
+    [toggle, ...menu.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")];
+
+  function setOpen(open: boolean, restoreFocus = true) {
+    toggle.setAttribute("aria-expanded", String(open));
+    label.textContent = open ? toggle.dataset.labelClose! : toggle.dataset.labelOpen!;
+    header.toggleAttribute("data-open", open);
+    menu.toggleAttribute("data-open", open);
+    menu.inert = !open;
+    if (open) menu.querySelector<HTMLElement>("a")?.focus();
+    else if (restoreFocus) toggle.focus();
+  }
+
+  const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+
+  toggle.addEventListener("click", () => setOpen(!isOpen()));
+  menu.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a")) setOpen(false, false);
+  });
+  desktop.addEventListener("change", (e) => e.matches && isOpen() && setOpen(false, false));
+
+  document.addEventListener("keydown", (e) => {
+    if (!isOpen()) return;
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setOpen(false);
+      return;
+    }
+    if (e.key !== "Tab") return;
+    const items = focusables();
+    const first = items[0]!;
+    const last = items[items.length - 1]!;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  // Active section highlight
+  const links = document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
+  const sections = [...new Set([...links].map((l) => l.dataset.navLink!))]
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  const setActive = (id: string | null) =>
+    links.forEach((l) => l.setAttribute("aria-current", String(l.dataset.navLink === id)));
+
+  const visible = new Set<string>();
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target.id);
+        else visible.delete(entry.target.id);
+      }
+      setActive(sections.find((s) => visible.has(s.id))?.id ?? null);
+    },
+    { rootMargin: "-40% 0px -55% 0px" },
+  );
+  sections.forEach((s) => io.observe(s));
+</script>

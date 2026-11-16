@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from "astro";
+import Base from "../layouts/Base.astro";
+import { brand, legal } from "../data/content";
+
+export const getStaticPaths = (() =>
+  legal.links.map((link) => ({ params: { legal: link.href.slice(1) }, props: { title: link.label } }))) satisfies GetStaticPaths;
+
+const { title } = Astro.props;
+---
+
+<Base title={`${title} — ${brand}`} description={`${title} — ${brand}`} noindex>
+  <main id="main" class="container-page flex min-h-svh flex-col justify-center py-24">
+    <a href="/" class="font-display text-2xl font-bold tracking-tight">{brand}</a>
+    <h1 class="mt-10 text-h2 font-bold">{title}</h1>
+    <p class="mt-4 text-muted">{legal.comingSoon}</p>
+    <p class="mt-10">
+      <a href="/" class="font-semibold text-brand underline-offset-4 hover:underline">{legal.backHome}</a>
+    </p>
+  </main>
+</Base>

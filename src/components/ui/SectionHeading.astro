@@ -1,0 +1,39 @@
+---
+import { splitOn } from "../../lib/links";
+import Eyebrow from "./Eyebrow.astro";
+import Reveal from "./Reveal.astro";
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  /** Trailing fragment of `title` shown in muted grey. */
+  muted?: string;
+  body?: string;
+}
+
+const { id, eyebrow, title, muted, body } = Astro.props;
+const parts = muted ? splitOn(title, muted) : null;
+---
+
+<div class="mx-auto max-w-[760px] text-center">
+  <Reveal>
+    <Eyebrow text={eyebrow}><slot name="eyebrow" /></Eyebrow>
+  </Reveal>
+  <Reveal index={1}>
+    <h2 id={id} class="mt-5 text-h2 font-bold">
+      {
+        parts ? (
+          <>
+            {parts[0]}
+            <span class="text-muted">{parts[1]}</span>
+            {parts[2]}
+          </>
+        ) : (
+          <slot>{title}</slot>
+        )
+      }
+    </h2>
+  </Reveal>
+  {body && <Reveal index={2}><p class="mx-auto mt-5 max-w-[62ch] text-muted">{body}</p></Reveal>}
+</div>

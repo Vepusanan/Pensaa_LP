@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colour tokens — swap values here only */
+  --color-ink: #14131a;
+  --color-paper: #fbfaf7;
+  --color-surface: #ffffff;
+  --color-brand: #105ae6;
+  --color-brand-ink: #ffffff;
+  --color-brand-soft: #e7f0ff;
+  --color-muted: #6b6a76;
+  --color-line: #e7e5ee;
+
+  --color-accent-red: #ff5a5f;
+  --color-accent-red-soft: #ffe7e8;
+  --color-accent-amber: #f5a524;
+  --color-accent-amber-soft: #fff1d6;
+  --color-accent-blue: #3b82f6;
+  --color-accent-blue-soft: #e3eeff;
+  --color-accent-green: #22a06b;
+  --color-accent-green-soft: #ddf5ea;
+
+  /* Text-safe (AA on the soft tints) variants of the accents, derived from the tokens */
+  --color-accent-red-ink: color-mix(in oklab, var(--color-accent-red) 62%, var(--color-ink));
+  --color-accent-amber-ink: color-mix(in oklab, var(--color-accent-amber) 45%, var(--color-ink));
+  --color-accent-blue-ink: color-mix(in oklab, var(--color-accent-blue) 70%, var(--color-ink));
+  --color-accent-green-ink: color-mix(in oklab, var(--color-accent-green) 62%, var(--color-ink));
+
+  /* Type */
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --text-hero: clamp(2.5rem, 5.6vw, 4.5rem);
+  --text-hero--line-height: 1.04;
+  --text-hero--letter-spacing: -0.035em;
+  --text-h2: clamp(2rem, 4vw, 3.25rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.025em;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.08em;
+
+  /* Shape */
+  --radius-card: 24px;
+  --radius-image: 20px;
+
+  --shadow-soft: 0 1px 2px rgb(20 19 26 / 0.04), 0 8px 24px -12px rgb(20 19 26 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(20 19 26 / 0.04), 0 18px 40px -18px rgb(20 19 26 / 0.22);
+}
+
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1200px;
+  padding-inline: 1.25rem;
+
+  @variant md {
+    padding-inline: 2rem;
+  }
+}
+
+@utility section-y {
+  padding-block: 5rem;
+
+  @variant md {
+    padding-block: 7rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-sans text-body text-ink antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-ink;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-brand-soft);
+    color: var(--color-ink);
+  }
+}
+
+/* Hero: soft cloud band behind the demo (gradients only, no blur filters) */
+.hero-cloud {
+  --c: var(--color-brand);
+  background:
+    radial-gradient(38% 40% at 8% 55%, color-mix(in oklab, var(--c) 34%, transparent), transparent 70%),
+    radial-gradient(30% 32% at 30% 42%, color-mix(in oklab, var(--c) 26%, transparent), transparent 70%),
+    radial-gradient(34% 36% at 55% 46%, color-mix(in oklab, var(--c) 22%, transparent), transparent 70%),
+    radial-gradient(30% 34% at 78% 40%, color-mix(in oklab, var(--c) 28%, transparent), transparent 70%),
+    radial-gradient(40% 42% at 95% 58%, color-mix(in oklab, var(--c) 34%, transparent), transparent 70%),
+    linear-gradient(to bottom, transparent 25%, color-mix(in oklab, var(--c) 28%, transparent) 55%, color-mix(in oklab, var(--c) 16%, transparent) 80%, var(--color-paper));
+}
+
+/* Hero: muted headline words rise in one by one */
+@media (prefers-reduced-motion: no-preference) {
+  .word-rise {
+    display: inline-block;
+    animation: word-rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(250ms + var(--i, 0) * 90ms);
+  }
+}
+
+@keyframes word-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em) rotate(-4deg);
+  }
+}
+
+/* Scroll reveals: only hide when JS is running and motion is allowed */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 500ms ease-out,
+      transform 500ms ease-out;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* FAQ: smooth open/close where supported, instant elsewhere */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+
+.faq-item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 280ms ease,
+    content-visibility 280ms allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}

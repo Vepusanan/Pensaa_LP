@@ -1,0 +1,51 @@
+---
+import { practice } from "../data/content";
+import Badge from "./ui/Badge.astro";
+import Button from "./ui/Button.astro";
+import Icon from "./ui/Icon.astro";
+import Reveal from "./ui/Reveal.astro";
+import SectionHeading from "./ui/SectionHeading.astro";
+---
+
+<section id="practice" class="section-y" aria-labelledby="practice-title">
+  <div class="container-page">
+    <SectionHeading id="practice-title" eyebrow={practice.eyebrow} title={practice.headline} muted={practice.headlineMuted}>
+      <span slot="eyebrow" class="contents"><Badge text={practice.badge} tone="neutral" /></span>
+    </SectionHeading>
+
+    <div class="relative isolate mt-14 md:mt-20 md:px-10 md:py-14">
+      <div class="practice-lines absolute inset-0 -z-10 hidden md:block" aria-hidden="true"></div>
+      <div class="flex flex-col gap-5 md:gap-0">
+        <Reveal class="md:w-[min(560px,58%)]">
+          <article class="rounded-card border border-line bg-surface p-7 shadow-lift md:p-8">
+            <Badge text={practice.liveBadge} tone="live" />
+            <p class="mt-4 text-lg/relaxed text-ink">{practice.paragraphOne}</p>
+          </article>
+        </Reveal>
+        <Reveal index={1} class="md:-mt-4 md:ml-auto md:w-[min(560px,58%)] md:translate-y-10">
+          <article class="rounded-card bg-brand p-7 text-brand-ink shadow-lift md:p-8">
+            <Badge text={practice.cardBadge} tone="progress" />
+            <p class="mt-4 text-lg/relaxed">{practice.paragraphTwo}</p>
+          </article>
+        </Reveal>
+      </div>
+    </div>
+
+    <Reveal class="mt-14 flex justify-center md:mt-20">
+      <Button href="#future" variant="secondary">
+        {practice.cta}
+        <Icon name="arrow-down" class="size-4" />
+      </Button>
+    </Reveal>
+  </div>
+</section>
+
+<style>
+  .practice-lines {
+    background-image:
+      linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+    background-size: 25% 33.333%;
+    mask-image: radial-gradient(ellipse at center, black 50%, transparent 85%);
+  }
+</style>

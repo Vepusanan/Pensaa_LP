@@ -1,0 +1,48 @@
+---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { Image } from "astro:assets";
+
+interface Props {
+  /** Path under /public, e.g. /images/screens/dashboard.png */
+  src: string;
+  alt: string;
+  caption: string;
+  width?: number;
+  height?: number;
+  eager?: boolean;
+  class?: string;
+}
+
+const { src, alt, caption, width = 1600, height = 1000, eager = false, class: className } = Astro.props;
+const exists = existsSync(join(process.cwd(), "public", src));
+---
+
+<div
+  class:list={["overflow-hidden rounded-image border border-line bg-surface shadow-soft", className]}
+  style={`aspect-ratio: ${width} / ${height}`}
+>
+  {
+    exists ? (
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={eager ? "eager" : "lazy"}
+        class="size-full object-cover"
+      />
+    ) : (
+      <div
+        role="img"
+        aria-label={alt}
+        class="relative grid size-full place-items-center bg-linear-to-br from-brand-soft via-surface to-accent-blue-soft"
+      >
+        <div class="absolute inset-4 rounded-[14px] border border-dashed border-brand/30" aria-hidden="true" />
+        <span class="rounded-full bg-surface/80 px-4 py-2 text-sm font-medium text-muted shadow-soft">
+          {caption}
+        </span>
+      </div>
+    )
+  }
+</div>

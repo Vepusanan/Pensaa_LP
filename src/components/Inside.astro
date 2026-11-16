@@ -1,0 +1,44 @@
+---
+import { inside } from "../data/content";
+import Placeholder from "./ui/Placeholder.astro";
+import SectionHeading from "./ui/SectionHeading.astro";
+
+// Panel colour per milestone (cycled)
+const panels = ["bg-brand", "bg-accent-green-soft", "bg-ink", "bg-accent-amber-soft"];
+---
+
+<section id="inside" class="section-y bg-surface" aria-labelledby="inside-title">
+  <div class="container-page">
+    <SectionHeading
+      id="inside-title"
+      eyebrow={inside.eyebrow}
+      title={inside.headline}
+      muted={inside.headlineMuted}
+      body={inside.body}
+    />
+
+    <!-- md+: each row pins below the nav and the next row slides up over it -->
+    <ol class="mt-14 flex flex-col gap-5 md:mt-20 md:gap-10">
+      {
+        inside.milestones.map((m, i) => (
+          <li class="grid gap-3 md:sticky md:top-24 md:h-[clamp(440px,calc(100svh-8rem),600px)] md:grid-cols-2">
+            <div class:list={["grid place-items-center rounded-card p-6 md:order-2 md:p-10", panels[i % panels.length]]}>
+              <Placeholder src={m.image} alt={m.alt} caption={m.caption} class="w-full" />
+            </div>
+            <div class="relative isolate flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-card border border-line bg-paper px-8 py-12 text-center">
+              <span
+                class="absolute inset-0 -z-10 grid place-items-center font-display text-[13rem] leading-none font-bold text-line/70 select-none md:text-[22rem]"
+                aria-hidden="true"
+              >
+                {i + 1}
+              </span>
+              <span class="text-sm font-semibold text-brand tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="mt-2 text-2xl font-bold tracking-tight md:text-3xl">{m.title}</h3>
+              <p class="mt-3 max-w-[40ch] text-muted">{m.description}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

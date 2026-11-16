@@ -1,0 +1,88 @@
+Pensaa Landing Page Copy
+Current version, 2 Nov 2026. Matches the landing page mockup.
+Navigation
+Logo: Pensaa
+Tabs: The Problem · Inside Pensaa · Practice Mode · Who It's For · Our Future · FAQ
+Header actions: Log In (link) · Sign Up Free (button)
+1. Hero
+Eyebrow: Pensaa
+Headline: Make practice personal — not hours of random drills.
+Subheadline: Pensaa lets teachers create exams and students organize their practice, using a real question bank organized by topic and difficulty — graded automatically with partial credit and rubrics, with feedback that explains the mistake, not just the score.
+Buttons: Sign Up Free (primary) · Already have an account? Log In (secondary)
+Right side: Demo slot, labeled "Demo (slide)" (placeholder for the product demo)
+2. The Problem
+Eyebrow: Let's be honest
+Headline: A 67% tells a student nothing except that they should feel bad about it.
+Body: Marks measure what happened. They don't explain it. A score sheet can't tell a student which concept slipped, and it definitely can't tell a teacher that the same concept slipped for half the class. So the same gaps resurface on the next test — and the one after that.
+Four pain points (colored cards):
+A red "X" doesn't explain the mistake — it just marks it
+By the time feedback arrives, the student has already moved on
+Teachers spend their weekends grading instead of teaching
+Exam mistakes — careless slips or real gaps — rarely get pointed out and connected to what to review next
+3. Inside Pensaa
+Eyebrow: What's actually built
+Headline: Real courses, with questions organized in a question bank.
+Body: Everything lives inside a Course — create one, share the join code or link, and students enroll directly or by your permission. Here's what that looks like, screen by screen.
+Four milestones, alternating image left/right, each with a real product screenshot:
+01 — One dashboard, every role
+Courses you teach and courses you're enrolled in sit side by side on the same account — no separate student login, no role switch.
+Screenshot: dashboard
+02 — Build your bank, one question at a time
+Choice, Written Response, and Fill in the Blank — all created from the same place, so a course bank doesn't need five different tools to fill it.
+Screenshot: Add Question menu
+03 — Configure exactly how it runs
+Time limits, answer-visibility timing, retake policy, question order, passing score — set once per quiz, not negotiated after the fact.
+Screenshot: quiz settings tab
+04 — See where the class struggled
+Score distribution, pass/fail, completion time, and which question tripped up the most students — the moment the quiz closes.
+Screenshot: analytics dashboard
+4. Practice Mode
+Eyebrow: Where we are today · Latest updates
+Headline: Practice Mode is live. Fully adaptive delivery is what we're building next.
+Teachers choose exactly which folders are available for practice — by topic, by difficulty, or both — and turn the whole thing on or off per course. Students pick from the folders they've been given, set how many questions and how much time they want, and start practicing.
+Every attempt a student makes is already being logged — which question, right or wrong, when — because that's the exact data our Adaptive Mastery Engine needs to start routing harder questions to students who are ready for them, and easier ones to students who aren't. That matching engine is in active development. Today, Practice Mode draws questions from the folders and difficulty range you've selected; it isn't yet personalizing question order to an individual student's demonstrated mastery. We'd rather tell you that directly than have you discover it mid-session.
+Button: See what's coming
+5. Who It's For
+Eyebrow: Who's it for?
+Headline: Teachers and students — and often, both at once.
+Visual: Illustration of one person split down the middle: a teacher (suit, pointer, "Teach") on the left and a student (hoodie, book, "Learn") on the right.
+Teachers: Tired of grading the same mistake forty times by hand — whether you're running one classroom or coordinating banks across an institution. Rubrics, partial credit, and a confidential exam pool kept separate from everyday practice.
+Students: Who'd rather understand the material than just survive the test. Every wrong answer comes with an explanation, not just a mark.
+Caption: One account, both sides — the same login teaches a course in the morning and practices in another by afternoon.
+6. Our Future
+Eyebrow: Our future
+Headline: Where Pensaa is going next.
+Resources from institutions  [Coming later]
+With each institution's permission, we want to bring real papers and question sets into Pensaa — for example Sri Lankan A/L papers and IELTS practice. Teachers can pull them into their own question banks, and students can practice straight from them, like a past-paper session.
+Adaptive learning  [In development]
+In Practice Mode, your questions will be chosen from your mastery of the course. Get a topic right and the questions get harder; keep missing it and you get more practice on exactly that topic — instead of hours of random practice.
+7. FAQ
+Is it free to sign up?
+Yes — signing up is free and you can start building a course right away.
+Do I need separate accounts to teach and to learn?
+No. One account does both — courses you teach and courses you're enrolled in appear together on your dashboard.
+How do students join a course?
+Teachers share a join code or link, and students enroll directly or by the teacher's permission.
+What kinds of questions can I create?
+Choice, Written Response, and Fill in the Blank. Questions live in a bank organized by topic and difficulty, and you can reuse them across quizzes and exams.
+How does grading work?
+Most answers are graded automatically, with partial credit and rubrics. Written responses that can't be graded automatically go to the teacher.
+Is adaptive practice available yet?
+Not yet. Practice Mode is live today, with questions drawn from the topics and difficulty you pick. Mastery-based adaptive delivery is in development.
+Will exam questions leak into student practice?
+No. A confidential Exam Questions pool is kept separate from the bank students practice from.
+Can I use past papers from other institutions?
+Not yet. We plan to add papers such as Sri Lankan A/L and IELTS, only with each institution's permission.
+8. Footer
+Heading: Pensaa
+Body: We're building this with input from the people who'll actually use it — teachers, students, and the institutions standing behind both. If that's you, we want to hear from you.
+Contact: Got a question, an idea, or a classroom you want to pilot this in? Reach us at hello@pensaa.com
+Email box heading: Still deciding, or want more info first?
+Email box body: Drop your email below and we'll reach out directly — no pressure, just a real conversation about whether Pensaa fits your course.
+Input / button: you@school.edu · Get in touch
+Legal row: © 2026 Pensaa. All rights reserved. Terms & Conditions · Privacy Policy · Cookie Policy · Support Policy
+Open decisions
+Hero headline leads with "personal" practice while the adaptive engine isn't live yet — Section 4 and Our Future carry the honest disclosure.
+FAQ answers on pricing ("free to sign up") and exam-pool confidentiality need confirming against the product.
+The page has no closing Sign Up button after the hero; decide whether to add one back at the bottom.
+Soften "isn't yet personalizing…" to roadmap language once a shipping date exists.

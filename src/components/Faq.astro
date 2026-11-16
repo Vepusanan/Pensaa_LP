@@ -1,0 +1,39 @@
+---
+import { faq } from "../data/content";
+import Icon from "./ui/Icon.astro";
+import Reveal from "./ui/Reveal.astro";
+import SectionHeading from "./ui/SectionHeading.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<section id="faq" class="section-y bg-surface" aria-labelledby="faq-title">
+  <div class="container-page">
+    <SectionHeading id="faq-title" eyebrow={faq.eyebrow} title={faq.headline} muted={faq.headlineMuted} />
+
+    <Reveal index={1} class="mx-auto mt-12 max-w-[760px]">
+      {
+        faq.items.map((item, i) => (
+          <details class="faq-item group border-b border-line last:border-b-0" open={i === 0}>
+            <summary class="flex cursor-pointer list-none items-center gap-4 py-5 text-left font-medium md:text-lg">
+              <span class="grid size-7 shrink-0 place-items-center rounded-full bg-brand-soft text-brand transition-[transform,background-color,color] duration-300 group-open:rotate-45 group-open:bg-brand group-open:text-brand-ink">
+                <Icon name="plus" class="size-3.5" />
+              </span>
+              {item.question}
+            </summary>
+            <p class="max-w-[65ch] pb-6 pl-11 text-muted">{item.answer}</p>
+          </details>
+        ))
+      }
+    </Reveal>
+  </div>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+</section>

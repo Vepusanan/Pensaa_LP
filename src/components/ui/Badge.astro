@@ -1,0 +1,35 @@
+---
+import type { BadgeTone } from "../../data/content";
+
+interface Props {
+  text: string;
+  tone?: BadgeTone;
+  class?: string;
+}
+
+const { text, tone = "brand", class: className } = Astro.props;
+
+const tones: Record<BadgeTone, string> = {
+  live: "bg-accent-green-soft text-accent-green-ink",
+  progress: "bg-accent-amber-soft text-accent-amber-ink",
+  neutral: "bg-accent-blue-soft text-accent-blue-ink",
+  brand: "bg-brand-soft text-brand",
+};
+const dots: Record<BadgeTone, string> = {
+  live: "bg-accent-green",
+  progress: "bg-accent-amber",
+  neutral: "bg-accent-blue",
+  brand: "bg-brand",
+};
+---
+
+<span
+  class:list={[
+    "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold tracking-normal normal-case",
+    tones[tone],
+    className,
+  ]}
+>
+  <span class:list={["size-1.5 rounded-full", dots[tone]]} aria-hidden="true"></span>
+  {text}
+</span>

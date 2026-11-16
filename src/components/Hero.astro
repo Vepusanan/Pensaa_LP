@@ -1,0 +1,52 @@
+---
+import { hero } from "../data/content";
+import { appLinks, splitOn } from "../lib/links";
+import Button from "./ui/Button.astro";
+import Eyebrow from "./ui/Eyebrow.astro";
+import Reveal from "./ui/Reveal.astro";
+import DemoFrame from "./DemoFrame.astro";
+
+const parts = splitOn(hero.headline, hero.highlight);
+const tail = parts && hero.headlineMuted ? splitOn(parts[2], hero.headlineMuted) : null;
+---
+
+<section id="top" class="relative isolate overflow-hidden pt-[72px]">
+  <div class="hero-cloud pointer-events-none absolute inset-x-0 top-[25%] bottom-0 -z-10 md:top-[22%]" aria-hidden="true"></div>
+
+  <div class="container-page pt-10 pb-16 text-center md:pt-16 md:pb-24">
+    <Reveal><Eyebrow text={hero.eyebrow} /></Reveal>
+    <h1 class="mx-auto mt-5 max-w-[22ch] text-hero font-medium">
+      {
+        parts && tail ? (
+          <>
+            {parts[0]}
+            {parts[1]}
+            {tail[0].trimEnd()}
+            <br class="hidden sm:block" />
+            <span class="text-muted">
+              {tail[1].split(" ").map((word, i) => (
+                <>
+                  <span class="word-rise" style={`--i: ${i}`}>{word}</span>{" "}
+                </>
+              ))}
+            </span>
+            {tail[2]}
+          </>
+        ) : (
+          hero.headline
+        )
+      }
+    </h1>
+    <Reveal index={1}>
+      <p class="mx-auto mt-6 max-w-[56ch] text-ink/80 md:text-lg/relaxed">{hero.subheadline}</p>
+    </Reveal>
+    <Reveal index={2} class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <Button href={appLinks.signup} shape="rounded">{hero.primaryCta}</Button>
+      <Button href={appLinks.login} variant="soft" shape="rounded">{hero.secondaryCta}</Button>
+    </Reveal>
+
+    <Reveal index={3} class="mx-auto mt-14 max-w-[820px] md:mt-20">
+      <DemoFrame label={hero.demoLabel} />
+    </Reveal>
+  </div>
+</section>

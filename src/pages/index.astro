@@ -1,0 +1,31 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Problem from "../components/Problem.astro";
+import Inside from "../components/Inside.astro";
+import Practice from "../components/Practice.astro";
+import Audience from "../components/Audience.astro";
+import Future from "../components/Future.astro";
+import Faq from "../components/Faq.astro";
+import ClosingCta from "../components/ClosingCta.astro";
+import Footer from "../components/Footer.astro";
+
+// Closing CTA headline is a proposal, not approved copy. Flip to true once signed off.
+const SHOW_CLOSING_CTA = false;
+---
+
+<Base>
+  <Nav />
+  <main id="main" tabindex="-1">
+    <Hero />
+    <Problem />
+    <Inside />
+    <Practice />
+    <Audience />
+    <Future />
+    <Faq />
+    {SHOW_CLOSING_CTA && <ClosingCta />}
+  </main>
+  <Footer />
+</Base>
