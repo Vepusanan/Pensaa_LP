@@ -2,7 +2,6 @@
 import { hero } from "../data/content";
 import { appLinks, splitOn } from "../lib/links";
 import Button from "./ui/Button.astro";
-import Eyebrow from "./ui/Eyebrow.astro";
 import Reveal from "./ui/Reveal.astro";
 import DemoFrame from "./DemoFrame.astro";
 
@@ -14,8 +13,7 @@ const tail = parts && hero.headlineMuted ? splitOn(parts[2], hero.headlineMuted)
   <div class="hero-cloud pointer-events-none absolute inset-x-0 top-[25%] bottom-0 -z-10 md:top-[22%]" aria-hidden="true"></div>
 
   <div class="container-page pt-10 pb-16 text-center md:pt-16 md:pb-24">
-    <Reveal><Eyebrow text={hero.eyebrow} /></Reveal>
-    <h1 class="mx-auto mt-5 max-w-[22ch] text-hero font-medium">
+    <h1 class="mx-auto max-w-[22ch] text-hero font-medium">
       {
         parts && tail ? (
           <>

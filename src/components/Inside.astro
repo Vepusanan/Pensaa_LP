@@ -22,10 +22,10 @@ const panels = ["bg-brand", "bg-accent-green-soft", "bg-ink", "bg-accent-amber-s
       {
         inside.milestones.map((m, i) => (
           <li class="grid gap-3 md:sticky md:top-24 md:h-[clamp(440px,calc(100svh-8rem),600px)] md:grid-cols-2">
-            <div class:list={["grid place-items-center rounded-card p-6 md:order-2 md:p-10", panels[i % panels.length]]}>
+            <div class:list={["grid place-items-center rounded-xl p-6 md:order-2 md:p-10", panels[i % panels.length]]}>
               <Placeholder src={m.image} alt={m.alt} caption={m.caption} class="w-full" />
             </div>
-            <div class="relative isolate flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-card border border-line bg-paper px-8 py-12 text-center">
+            <div class="relative isolate flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-xl border border-line bg-paper px-8 py-12 text-center">
               <span
                 class="absolute inset-0 -z-10 grid place-items-center font-display text-[13rem] leading-none font-bold text-line/70 select-none md:text-[22rem]"
                 aria-hidden="true"

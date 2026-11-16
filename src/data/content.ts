@@ -224,7 +224,7 @@ export const faq = {
     {
       question: "Do I need separate accounts to teach and to learn?",
       answer:
-        "No. One account does both — courses you teach and courses you're enrolled in appear together on your dashboard.",
+        "No. One account does both - courses you teach and courses you're enrolled in appear together on your dashboard.",
     },
     {
       question: "How do students join a course?",
@@ -260,12 +260,12 @@ export const faq = {
 
 export const footer = {
   heading: "Pensaa",
-  body: "We're building this with input from the people who'll actually use it — teachers, students, and the institutions standing behind both. If that's you, we want to hear from you.",
+  body: "We're building this with input from the people who'll actually use it - teachers, students, and the institutions standing behind both. If that's you, we want to hear from you.",
   contactLabel: "Got a question, an idea, or a classroom you want to pilot this in? Reach us at",
   email: "hello@pensaa.com",
   capture: {
     heading: "Still deciding, or want more info first?",
-    body: "Drop your email below and we'll reach out directly — no pressure, just a real conversation about whether Pensaa fits your course.",
+    body: "Drop your email below and we'll reach out directly - no pressure, just a real conversation about whether Pensaa fits your course.",
     label: "Email address",
     placeholder: "you@school.edu",
     button: "Get in touch",

@@ -27,7 +27,7 @@
   --color-accent-green-ink: color-mix(in oklab, var(--color-accent-green) 62%, var(--color-ink));
 
   /* Type */
-  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
   --text-hero: clamp(2.5rem, 5.6vw, 4.5rem);
@@ -53,11 +53,11 @@
 @utility container-page {
   margin-inline: auto;
   width: 100%;
-  max-width: 1200px;
-  padding-inline: 1.25rem;
+  max-width: 1440px;
+  padding-inline: 1rem;
 
   @variant md {
-    padding-inline: 2rem;
+    padding-inline: 1.25rem;
   }
 }
 
